@@ -26,14 +26,14 @@ public class WorkOutDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         if(savedInstanceState != null){
             mDetailID = savedInstanceState.getLong("workoutID");
+        }else{
+            StopwatchFragment stopwatchFragment = new StopwatchFragment();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            ft.replace(R.id.stopwatch_container, stopwatchFragment);
+            ft.addToBackStack(null);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
         }
-
-        StopwatchFragment stopwatchFragment = new StopwatchFragment();
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.stopwatch_container, stopwatchFragment);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_work_out_detail, container, false);
     }

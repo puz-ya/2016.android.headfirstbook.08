@@ -6,11 +6,14 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-public class StopwatchFragment extends Fragment {
+public class StopwatchFragment extends Fragment
+        implements View.OnClickListener
+{
 
     //seconds left
     private int seconds = 0;
@@ -41,7 +44,16 @@ public class StopwatchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View layout = inflater.inflate(R.layout.fragment_stopwatch, container, false);
-        runTimmer();
+        //Start
+        Button buttonStart = (Button) layout.findViewById(R.id.start_button);
+        buttonStart.setOnClickListener(this);
+        //Stop
+        Button buttonStop = (Button) layout.findViewById(R.id.stop_button);
+        buttonStop.setOnClickListener(this);
+        //Reset
+        Button buttonReset = (Button) layout.findViewById(R.id.reset_button);
+        buttonReset.setOnClickListener(this);
+        runTimmer(layout);
         // Inflate the layout for this fragment
         return layout;
     }
@@ -69,8 +81,23 @@ public class StopwatchFragment extends Fragment {
         seconds = 0;
     }
 
-    private void runTimmer(){
-        View view = getView();
+    @Override
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.start_button:
+                onClickStart(view);
+                break;
+            case R.id.stop_button:
+                onClickStop(view);
+                break;
+            case R.id.reset_button:
+                onClickReset(view);
+                break;
+        }
+    }
+
+    private void runTimmer(View view){
+        //View view = getView();
         if(view != null) {
             final TextView textView = (TextView) view.findViewById(R.id.time_view);
 
