@@ -2,6 +2,7 @@ package com.yd.stopwatchinworkout;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,13 @@ public class WorkOutDetailFragment extends Fragment {
         if(savedInstanceState != null){
             mDetailID = savedInstanceState.getLong("workoutID");
         }
+
+        StopwatchFragment stopwatchFragment = new StopwatchFragment();
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.replace(R.id.stopwatch_container, stopwatchFragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_work_out_detail, container, false);
     }
