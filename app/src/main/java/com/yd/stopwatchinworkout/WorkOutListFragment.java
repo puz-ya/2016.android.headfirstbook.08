@@ -45,15 +45,14 @@ public class WorkOutListFragment extends ListFragment {
 
     private WorkOutListener mWorkOutListener;
 
-    @Override   //new version, NO (Activity activity) :\
-    public void onAttach(Context context){
-        super.onAttach(context);
+    @Override
+    public void onActivityCreated(Bundle bundle){
+        super.onActivityCreated(bundle);
 
         Activity activity;
         if(getActivity() != null){
             activity = getActivity();
 
-            //WTF?
             this.mWorkOutListener = (WorkOutListener) activity;
         }
     }
